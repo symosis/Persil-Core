@@ -1,0 +1,29 @@
+<project name="Persil-Core" default="all">
+	
+	<target name="all" depends="prepare, libs, compile, tests">
+	</target>
+	
+	<target name="prepare">
+		<mkdir dir="release"/>
+		<mkdir dir="release/test"/>
+	</target>
+	
+	<target name="libs">
+		<exec dir="${basedir}" executable="haxelib">
+			<arg line="install munit"/>
+		</exec>
+	</target>
+	
+	<target name="compile">
+		<exec dir="${basedir}" executable="haxe">
+			<arg line="project.hxml"/>
+		</exec>
+	</target>
+	
+	<target name="tests">
+		<exec dir="${basedir}" executable="haxelib">
+			<arg line="run munit run"/>
+		</exec>
+	</target>
+	
+</project>
