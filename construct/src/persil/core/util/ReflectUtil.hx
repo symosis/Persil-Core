@@ -1,4 +1,4 @@
-package persil.core;
+package persil.core.util;
 
 import haxe.rtti.CType;
 import haxe.rtti.Meta;

@@ -2,8 +2,8 @@ package persil.core;
 
 import massive.munit.Assert;
 
-import persil.core.extension.FrontMessenger;
-import persil.core.extension.Messenger;
+import persil.core.extension.messaging.FrontMessenger;
+import persil.core.extension.messaging.Messenger;
 
 class TestFrontMessenger
 {

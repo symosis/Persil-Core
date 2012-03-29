@@ -1,9 +1,10 @@
-package persil.core.extension;
+package persil.core.extension.messaging;
 
 import persil.core.context.Context;
 import persil.core.context.ContextObject;
 import persil.core.extension.Extension;
-import persil.core.extension.FrontMessenger;
+
+import persil.core.extension.messaging.FrontMessenger;
 
 class MessengerExtension implements Extension 
 {

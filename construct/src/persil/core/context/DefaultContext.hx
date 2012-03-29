@@ -3,6 +3,8 @@ package persil.core.context;
 import persil.core.extension.Extension;
 import persil.reflect.ClassInfo;
 
+import persil.core.util.ReflectUtil;
+
 class DefaultContext implements Context
 {
 	public var objects : Array<ContextObject>;

@@ -1,8 +1,9 @@
-package persil.core.extension;
+package persil.core.extension.observer;
 
 import persil.core.context.Context;
 import persil.core.context.ContextObject;
 import persil.reflect.ClassInfo;
+
 import persil.core.extension.Extension;
 
 class ObserverExtension implements Extension 

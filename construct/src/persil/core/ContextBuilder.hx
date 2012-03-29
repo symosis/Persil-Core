@@ -7,6 +7,8 @@ import persil.core.context.ContextObject;
 import persil.core.context.DefaultContext;
 import persil.core.extension.Extension;
 
+import persil.core.util.ReflectUtil;
+
 class ContextBuilder
 {
 	private static var defaultContext : Context;

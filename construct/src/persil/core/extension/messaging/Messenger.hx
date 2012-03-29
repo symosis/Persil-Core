@@ -1,4 +1,4 @@
-package persil.core.extension;
+package persil.core.extension.messaging;
 
 class Messenger
 {

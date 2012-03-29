@@ -2,7 +2,7 @@ package persil.core;
 
 import massive.munit.Assert;
 
-import persil.core.extension.ObserverExtension;
+import persil.core.extension.observer.ObserverExtension;
 
 class TestObserve
 {

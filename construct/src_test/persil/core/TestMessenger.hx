@@ -2,7 +2,7 @@ package persil.core;
 
 import massive.munit.Assert;
 
-import persil.core.extension.Messenger;
+import persil.core.extension.messaging.Messenger;
 
 class TestMessenger
 {
