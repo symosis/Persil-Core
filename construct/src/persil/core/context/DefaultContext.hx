@@ -61,8 +61,8 @@ class DefaultContext implements Context
 
 		config.destroy();
 
-		objects = null;
-		config = null;
+		objects = new Array();
+		config = new ContextConfig();
 	}
 	
 	function getFilterByType<T>(type : Class<T>) : ContextObject->Bool
