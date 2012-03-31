@@ -1,7 +1,11 @@
-package persil.core.context;
+package persil.core;
 
 import persil.reflect.ClassInfo;
 
+import persil.core.context.Context;
+import persil.core.context.ContextObject;
+import persil.core.context.DynamicObject;
+import persil.core.context.DefaultDynamicObject;
 import persil.core.extension.Extension;
 import persil.core.util.ReflectUtil;
 
@@ -25,11 +29,10 @@ class DynamicObjectBuilder
 
 	public function build(instance : Dynamic) : DynamicObject
 	{
-		var dynamicObject : DynamicObject = new DefaultDynamicObject();
-		dynamicObject.instance = instance;
-		dynamicObject.context = context;
+		var contextObject : ContextObject = configureDynamicObject(instance);
 
-		dynamicObject.contextObject = configureDynamicObject(instance);
+		var dynamicObject : DynamicObject = new DefaultDynamicObject(context, contextObject);
+		dynamicObject.instance = instance;
 
 		return dynamicObject;
 	}

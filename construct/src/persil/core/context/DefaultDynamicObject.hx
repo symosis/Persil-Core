@@ -2,11 +2,16 @@ package persil.core.context;
 
 class DefaultDynamicObject implements DynamicObject
 {
-	public var context : Context;
-	public var contextObject : ContextObject;
 	public var instance : Dynamic;
 
-	public function new() {}
+	private var context : Context;
+	private var contextObject : ContextObject;
+	
+	public function new(context : Context, contextObject : ContextObject) 
+	{
+		this.context = context;
+		this.contextObject = contextObject;
+	}
 
 	public function remove() : Void
 	{
