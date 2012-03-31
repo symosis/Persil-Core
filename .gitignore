@@ -1,4 +1,4 @@
 .hxtypes
 .mcover
 release
-.DS_Store
+*.DS_Store
