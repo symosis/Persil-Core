@@ -9,6 +9,8 @@ interface Context
 	var config : ContextConfig;
 	
 	function addObject(name : String, classInfo : ClassInfo, object : Dynamic) : ContextObject;
+
+	function addDynamicObject(instance : Dynamic) : DynamicObject;
 	
 	function getObjectByName(name : String) : Dynamic;
 	

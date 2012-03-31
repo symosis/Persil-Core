@@ -62,15 +62,6 @@ class ContextBuilder
 		return defaultContext;
 	}
 	
-	public function configure(object : Dynamic) : Void
-	{
-		if (defaultContext == null)
-			throw createError("Cannot configure Object as no context is available!");
-
-		context = defaultContext;
-		configureInternal(object);
-	}
-
 	function configureInternal(object : Dynamic)
 	{
 		var contextObject = context.addObject("configured", ClassInfo.forInstance(object), object);

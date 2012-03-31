@@ -8,7 +8,6 @@ class TestSuite extends massive.munit.TestSuite
 		add(persil.core.TestInjectById);
 		add(persil.core.TestGetObject);
 		add(persil.core.TestDynamic);
-		add(persil.core.TestConfigure);
 		add(persil.core.TestComplete);
 		add(persil.core.TestAddObject);
 		add(persil.core.TestError);
@@ -18,5 +17,6 @@ class TestSuite extends massive.munit.TestSuite
 		add(persil.core.TestMultipleConfigs);
 		add(persil.core.TestMessengerExtension);
 		add(persil.core.TestDestroy);
+		add(persil.core.TestDynamicObject);
 	}
 }

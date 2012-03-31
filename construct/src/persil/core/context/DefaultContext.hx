@@ -24,6 +24,13 @@ class DefaultContext implements Context
 		return contextObject;
 	}
 
+	public function addDynamicObject(instance : Dynamic) : DynamicObject
+	{
+		return DynamicObjectBuilder.newBuilder()
+				.withContext(this)
+				.build(instance);
+	}
+
 
 	public function getObjectByName(name) : Dynamic
 	{
@@ -51,7 +58,7 @@ class DefaultContext implements Context
 	{
 		return Lambda.filter(objects, getFilterByType(type));
 	}
-
+	
 	public function destroy() : Void
 	{
 		var extensions : Array<Extension> = config.extensions;
