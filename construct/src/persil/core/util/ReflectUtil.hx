@@ -3,16 +3,19 @@ package persil.core.util;
 import haxe.rtti.CType;
 import haxe.rtti.Meta;
 
+import persil.metadata.Metadata;
+
 class ReflectUtil
 {
-	public static function callMethodWithMetadata(object : Dynamic, type : Class<Dynamic>, metadata : String, args : Array<Dynamic>) : Dynamic
+	public static function callMethodWithMetadata(object : Dynamic, type : Class<Dynamic>, metadataClass : Class<Metadata>, args : Array<Dynamic>) : Dynamic
 	{
+		var metadata : Metadata = cast Type.createInstance(metadataClass, []);
 		var metadatas = Meta.getFields(type);
 
 		for(fieldName in Reflect.fields(metadatas))
 		{
 			var meta = Reflect.field(metadatas, fieldName);
-			if (Reflect.hasField(meta, metadata))
+			if (Reflect.hasField(meta, metadata.identifier))
 			{
 				return Reflect.callMethod(object, Reflect.field(object, fieldName), []);
 			}

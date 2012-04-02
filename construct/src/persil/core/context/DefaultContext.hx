@@ -5,6 +5,9 @@ import persil.reflect.ClassInfo;
 
 import persil.core.dynamicobject.DynamicObject;
 import persil.core.dynamicobject.DynamicObjectBuilder;
+
+import persil.core.metadata.DestroyMetadata;
+
 import persil.core.util.ReflectUtil;
 
 class DefaultContext implements Context
@@ -89,6 +92,6 @@ class DefaultContext implements Context
 
 	function doDestroyCall(contextObject : ContextObject)
 	{
-		ReflectUtil.callMethodWithMetadata(contextObject.object, contextObject.type, "Destroy", []);
+		ReflectUtil.callMethodWithMetadata(contextObject.object, contextObject.type, DestroyMetadata, []);
 	}
 }

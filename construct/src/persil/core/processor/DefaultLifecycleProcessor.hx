@@ -1,12 +1,13 @@
 package persil.core.processor;
 
 import persil.core.context.Context;
-
-
-import persil.core.context.Context;
 import persil.core.context.ContextObject;
 import persil.core.context.DefaultContext;
 import persil.core.extension.Extension;
+
+import persil.core.metadata.InjectMetadata;
+import persil.core.metadata.CompleteMetadata;
+import persil.core.metadata.PostCompleteMetadata;
 
 import persil.core.util.ReflectUtil;
 
@@ -42,7 +43,7 @@ class DefaultLifecycleProcessor implements LifecycleProcessor
 			Log.warn("No RTTI for: ", contextObject.name, contextObject.classInfo.name);
 		for (property in contextObject.classInfo.properties)
 		{
-			if (property.hasMetadata("Inject"))
+			if (property.hasMetadata(InjectMetadata))
 			{
 				if (property.clazz == Context)
 				{
@@ -86,11 +87,11 @@ class DefaultLifecycleProcessor implements LifecycleProcessor
 	
 	function doCompleteCall(contextObject : ContextObject)
 	{
-		ReflectUtil.callMethodWithMetadata(contextObject.object, contextObject.type, "Complete", []);
+		ReflectUtil.callMethodWithMetadata(contextObject.object, contextObject.type, CompleteMetadata, []);
 	}
 
 	function doPostCompleteCall(contextObject : ContextObject)
 	{
-		ReflectUtil.callMethodWithMetadata(contextObject.object, contextObject.type, "PostComplete", []);
+		ReflectUtil.callMethodWithMetadata(contextObject.object, contextObject.type, PostCompleteMetadata, []);
 	}
 }

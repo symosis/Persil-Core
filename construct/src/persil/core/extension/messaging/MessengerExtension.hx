@@ -2,9 +2,11 @@ package persil.core.extension.messaging;
 
 import persil.core.context.Context;
 import persil.core.context.ContextObject;
-import persil.core.extension.Extension;
 
+import persil.core.extension.Extension;
 import persil.core.extension.messaging.FrontMessenger;
+import persil.core.extension.messaging.metadata.MessengerMetadata;
+import persil.core.extension.messaging.metadata.ReceiverMetadata;
 
 class MessengerExtension implements Extension 
 {
@@ -41,7 +43,7 @@ class MessengerExtension implements Extension
 	{
 		for (property in contextObject.classInfo.properties)
 		{
-			if (property.hasMetadata("Messenger"))
+			if (property.hasMetadata(MessengerMetadata))
 			{
 				var messenger = new Messenger();
 				property.setValue(contextObject.object, messenger);
@@ -55,12 +57,12 @@ class MessengerExtension implements Extension
 	{
 		for (method in contextObject.classInfo.methods)
 		{
-			if (method.hasMetadata("Receiver"))
+			if (method.hasMetadata(ReceiverMetadata))
 			{
 				if (method.parameters.length == 1)
 					frontMessenger.addReceiver(contextObject.object, method.name, method.parameters[0].type.type);
 				else
-					throw "Message: " + contextObject.classInfo.name + "." + method.name + " needs exactly one parameter";
+					throw "Receiver: " + contextObject.classInfo.name + "." + method.name + " needs exactly one parameter";
 			}
 		}		
 	}

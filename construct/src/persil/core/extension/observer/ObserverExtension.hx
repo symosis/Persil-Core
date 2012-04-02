@@ -5,6 +5,7 @@ import persil.core.context.ContextObject;
 import persil.reflect.ClassInfo;
 
 import persil.core.extension.Extension;
+import persil.core.extension.observer.metadata.ObserveMetadata;
 
 class ObserverExtension implements Extension 
 {
@@ -34,7 +35,7 @@ class ObserverExtension implements Extension
 	{
 		for (method in contextObject.classInfo.methods)
 		{
-			if (method.hasMetadata("Observe"))
+			if (method.hasMetadata(ObserveMetadata))
 			{
 				if (method.parameters.length == 1)
 					addObserver(contextObject, method.name, method.parameters[0].type);

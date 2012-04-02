@@ -7,6 +7,8 @@ import persil.core.context.ContextObject;
 import persil.core.context.DefaultContext;
 import persil.core.extension.Extension;
 
+import persil.core.metadata.InjectMetadata;
+
 import persil.core.util.ReflectUtil;
 
 class ContextBuilder
@@ -99,7 +101,7 @@ class ContextBuilder
 		
 		for (property in ci.properties)
 		{
-			if (property.hasMetadata("Inject"))
+			if (property.hasMetadata(InjectMetadata))
 				continue;
 				
 			var instance = property.getValue(config);
