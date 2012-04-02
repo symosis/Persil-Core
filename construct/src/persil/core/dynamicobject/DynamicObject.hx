@@ -1,4 +1,4 @@
-package persil.core.context;
+package persil.core.dynamicobject;
 
 interface DynamicObject 
 {

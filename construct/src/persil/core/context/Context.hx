@@ -1,7 +1,10 @@
 package persil.core.context;
 
-import persil.core.context.ContextConfig;
 import persil.reflect.ClassInfo;
+
+import persil.core.context.ContextConfig;
+import persil.core.dynamicobject.DynamicObject;
+
 
 interface Context
 {

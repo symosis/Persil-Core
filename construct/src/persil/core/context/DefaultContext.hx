@@ -3,6 +3,8 @@ package persil.core.context;
 import persil.core.extension.Extension;
 import persil.reflect.ClassInfo;
 
+import persil.core.dynamicobject.DynamicObject;
+import persil.core.dynamicobject.DynamicObjectBuilder;
 import persil.core.util.ReflectUtil;
 
 class DefaultContext implements Context

@@ -61,12 +61,6 @@ class ContextBuilder
 		buildInternal(cast context.config.configClasses);
 		return defaultContext;
 	}
-	
-	function configureInternal(object : Dynamic)
-	{
-		var contextObject = context.addObject("configured", ClassInfo.forInstance(object), object);
-		configureDynamicObjects(cast [contextObject]);
-	}
 
 	function buildInternal(configClasses : Array<Class<Dynamic>>)
 	{
@@ -75,7 +69,7 @@ class ContextBuilder
 		Lambda.iter(configClasses, createObjects);
 		Lambda.iter(configObjects, addObjects);
 
-		configureDynamicObjects(context.objects);
+		context.config.lifecycleProcessor.process(context);
 	}
 
 	function createObjects(configClass : Class<Dynamic>)
@@ -127,72 +121,6 @@ class ContextBuilder
 				}
 			}
 		}
-	}
-
-	function configureDynamicObjects(objects : Array<ContextObject>)
-	{
-		Lambda.iter(objects, wireContextObject);
-		Lambda.iter(context.config.extensions, processExtension);
-		Lambda.iter(objects, doCompleteCall);
-		Lambda.iter(objects, doPostCompleteCall);
-	}
-
-	function wireContextObject(contextObject : ContextObject)
-	{
-		if (!contextObject.classInfo.hasRtti)
-			Log.warn("No RTTI for: ", contextObject.name, contextObject.classInfo.name);
-		for (property in contextObject.classInfo.properties)
-		{
-			if (property.hasMetadata("Inject"))
-			{
-				if (property.clazz == Context)
-				{
-					property.setValue(contextObject.object, context);
-				}
-				else
-				{
-					var objects = context.getDynamicObjectsByType(property.clazz);
-					if (objects.length == 0)
-					{
-						Log.warn("Found [Inject] at object " + Type.getClassName(contextObject.type)+ "#" + property.name + " but could not find object to inject.");
-					}
-					else if (objects.length == 1)
-					{
-						property.setValue(contextObject.object, objects.first().object);				
-					}
-					else
-					{
-						var found = false;
-						for(object in objects)
-						{
-							if (object.name == property.name)
-							{
-								property.setValue(contextObject.object, object.object);
-								found = true;
-								break;				
-							}
-						}
-						if (!found)
-							throw "Multiple selection for type: " + property.type.name + " and no name match for: " + property.name;
-					}
-				}
-			}
-		}
-	}
-
-	function processExtension(extension : Extension) : Void
-	{
-		extension.process(context);
-	}
-	
-	function doCompleteCall(contextObject : ContextObject)
-	{
-		ReflectUtil.callMethodWithMetadata(contextObject.object, contextObject.type, "Complete", []);
-	}
-
-	function doPostCompleteCall(contextObject : ContextObject)
-	{
-		ReflectUtil.callMethodWithMetadata(contextObject.object, contextObject.type, "PostComplete", []);
 	}
 
 	function createError(message)

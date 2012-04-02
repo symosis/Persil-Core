@@ -1,7 +1,7 @@
 package persil.core;
 
 import persil.core.context.Context;
-import persil.core.context.DynamicObject;
+import persil.core.dynamicobject.DynamicObject;
 import persil.core.ContextBuilder;
 
 import massive.munit.Assert;
@@ -56,12 +56,23 @@ class TestDynamicObject
 	}
 
 	@Test
+	function chainConfigureShouldFail()
+	{
+		var e : E = new E();
+		var f : F = new F();
+
+		context.addDynamicObject(e);
+		context.addDynamicObject(f);
+		
+		Assert.isNull(e.f);
+	}
+
+	@Test
 	function destroy()
 	{
 		var d : D = new D();
 
 		var dynamicObject : DynamicObject = context.addDynamicObject(d);
-
 		
 		Assert.areEqual(2, context.objects.length);
 
@@ -70,7 +81,6 @@ class TestDynamicObject
 		var d2 : D = context.getObjectByType(D);
 
 		Assert.isNull(d2);
-
 	}
 }
 
@@ -100,5 +110,18 @@ private class D implements haxe.rtti.Infos
 	@Inject
 	public var a : A;
 
+	public function new() {}
+}
+
+private class E implements haxe.rtti.Infos
+{
+	@Inject
+	public var f : F;
+
+	public function new() {}
+}
+
+private class F implements haxe.rtti.Infos
+{
 	public function new() {}
 }

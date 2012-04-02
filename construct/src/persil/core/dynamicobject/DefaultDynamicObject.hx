@@ -1,4 +1,9 @@
-package persil.core.context;
+package persil.core.dynamicobject;
+
+import persil.core.context.Context;
+import persil.core.context.ContextObject;
+
+import persil.core.util.ReflectUtil;
 
 class DefaultDynamicObject implements DynamicObject
 {
@@ -17,7 +22,15 @@ class DefaultDynamicObject implements DynamicObject
 	{
 		context.objects.remove(contextObject);
 
+		doDestroyCall(contextObject);		
+
 		context = null;
+		contextObject = null;
 		instance = null;
+	}
+
+	function doDestroyCall(contextObject : ContextObject)
+	{
+		ReflectUtil.callMethodWithMetadata(contextObject.object, contextObject.type, "Destroy", []);
 	}
 }
