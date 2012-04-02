@@ -82,6 +82,18 @@ class TestDynamicObject
 
 		Assert.isNull(d2);
 	}
+
+	@Test
+	@Ignore
+	function triggerInitOnce()
+	{
+		var g : G = new G();
+
+		var contextOfG = ContextBuilder.newBuilder().addObject(g).build();
+
+		Assert.areEqual(1, H.initTriggered);
+		
+	}
 }
 
 private class A implements haxe.rtti.Infos
@@ -124,4 +136,34 @@ private class E implements haxe.rtti.Infos
 private class F implements haxe.rtti.Infos
 {
 	public function new() {}
+}
+
+private class G implements haxe.rtti.Infos
+{
+	@Inject
+	public var context : Context;
+
+	public function new() {}
+
+	@Complete
+	public function init() 
+	{
+		context.addDynamicObject(new H());
+	}
+}
+
+private class H implements haxe.rtti.Infos
+{
+	public static var initTriggered : Int;
+
+	public function new() 
+	{
+		H.initTriggered = 0;
+	}
+
+	@Complete
+	public function init() 
+	{
+		H.initTriggered++;
+	}
 }

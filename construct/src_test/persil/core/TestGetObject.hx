@@ -52,14 +52,6 @@ class TestGetObject
 		var b : B = context.getObjectByType(B);
 		Assert.isTrue(Std.is(b, B));
 	}
-
-	@Test
-	@Ignore
-	function getObjectAAndBByTypeC()
-	{
-		
-		Assert.isTrue(false);
-	}
 }
 
 private class TestConfigWithA implements haxe.rtti.Infos
