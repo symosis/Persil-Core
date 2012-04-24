@@ -84,8 +84,7 @@ class TestDynamicObject
 	}
 
 	@Test
-	@Ignore
-	function triggerInitOnce()
+	function triggerCompleteOnce()
 	{
 		var g : G = new G();
 

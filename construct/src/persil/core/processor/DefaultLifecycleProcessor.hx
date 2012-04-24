@@ -41,6 +41,7 @@ class DefaultLifecycleProcessor implements LifecycleProcessor
 	{
 		if (!contextObject.classInfo.hasRtti)
 			Log.warn("No RTTI for: ", contextObject.name, contextObject.classInfo.name);
+
 		for (property in contextObject.classInfo.properties)
 		{
 			if (property.hasMetadata(InjectMetadata))
@@ -87,11 +88,21 @@ class DefaultLifecycleProcessor implements LifecycleProcessor
 	
 	function doCompleteCall(contextObject : ContextObject)
 	{
-		ReflectUtil.callMethodWithMetadata(contextObject.object, contextObject.type, CompleteMetadata, []);
+		if(contextObject.lifecyclePhase.weight < LifecyclePhase.COMPLETE.weight)
+		{
+			ReflectUtil.callMethodWithMetadata(contextObject.object, contextObject.type, CompleteMetadata, []);
+
+			contextObject.lifecyclePhase = LifecyclePhase.COMPLETE;
+		}
 	}
 
 	function doPostCompleteCall(contextObject : ContextObject)
 	{
-		ReflectUtil.callMethodWithMetadata(contextObject.object, contextObject.type, PostCompleteMetadata, []);
+		if(contextObject.lifecyclePhase.weight < LifecyclePhase.POST_COMPLETE.weight)
+		{
+			ReflectUtil.callMethodWithMetadata(contextObject.object, contextObject.type, PostCompleteMetadata, []);
+
+			contextObject.lifecyclePhase = LifecyclePhase.POST_COMPLETE;
+		}
 	}
 }
