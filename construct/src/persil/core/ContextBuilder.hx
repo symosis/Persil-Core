@@ -34,21 +34,21 @@ class ContextBuilder
 		return this;
 	}
 
-	public function addObject(object : Dynamic) : ContextBuilder
+	public function addObject(object : haxe.rtti.Infos) : ContextBuilder
 	{
 		context.config.configObjects.push(object);
 
 		return this;
 	}
 
-	public function addConfig(configClass : Class<Dynamic>) : ContextBuilder
+	public function addConfig(configClass : Class<haxe.rtti.Infos>) : ContextBuilder
 	{
 		context.config.configClasses.push(configClass);
 
 		return this;
 	}
 
-	public function addConfigs(configClasses : Array<Dynamic>) : ContextBuilder
+	public function addConfigs(configClasses : Array<Class<haxe.rtti.Infos>>) : ContextBuilder
 	{
 		for (configClass in configClasses) 
 			context.config.configClasses.push(configClass);	
@@ -64,7 +64,7 @@ class ContextBuilder
 		return defaultContext;
 	}
 
-	function buildInternal(configClasses : Array<Class<Dynamic>>)
+	function buildInternal(configClasses : Array<Class<haxe.rtti.Infos>>)
 	{
 		var configObjects : Dynamic = context.config.configObjects;
 		
@@ -74,7 +74,7 @@ class ContextBuilder
 		context.config.lifecycleProcessor.process(context);
 	}
 
-	function createObjects(configClass : Class<Dynamic>)
+	function createObjects(configClass : Class<haxe.rtti.Infos>)
 	{
 		var config = Type.createInstance(configClass, []);
 		var ci = ClassInfo.forClass(configClass);

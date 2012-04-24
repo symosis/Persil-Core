@@ -7,7 +7,11 @@ class TestMultipleConfigs
 	@Test
 	function getObject()
 	{
-		var context = ContextBuilder.newBuilder().addConfigs([TestConfigWithA, TestConfigWithB]).build();
+		var configs = new Array<Class<haxe.rtti.Infos>>();
+		configs.push(TestConfigWithA);
+		configs.push(TestConfigWithB);
+		
+		var context = ContextBuilder.newBuilder().addConfigs(configs).build();
 		var a = context.getObjectByName("a");
 		Assert.isNotNull(a);
 		var b = context.getObjectByName("b");
