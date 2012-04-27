@@ -88,7 +88,7 @@ class DefaultLifecycleProcessor implements LifecycleProcessor
 	
 	function doCompleteCall(contextObject : ContextObject)
 	{
-		if(contextObject.lifecyclePhase.weight < LifecyclePhase.COMPLETE.weight)
+		if(contextObject.lifecyclePhase.priority < LifecyclePhase.COMPLETE.priority)
 		{
 			ReflectUtil.callMethodWithMetadata(contextObject.object, contextObject.type, CompleteMetadata, []);
 
@@ -98,7 +98,7 @@ class DefaultLifecycleProcessor implements LifecycleProcessor
 
 	function doPostCompleteCall(contextObject : ContextObject)
 	{
-		if(contextObject.lifecyclePhase.weight < LifecyclePhase.POST_COMPLETE.weight)
+		if(contextObject.lifecyclePhase.priority < LifecyclePhase.POST_COMPLETE.priority)
 		{
 			ReflectUtil.callMethodWithMetadata(contextObject.object, contextObject.type, PostCompleteMetadata, []);
 

@@ -6,10 +6,10 @@ class LifecyclePhase
 	public inline static var COMPLETE : LifecyclePhase = new LifecyclePhase(1);
 	public inline static var POST_COMPLETE : LifecyclePhase = new LifecyclePhase(2);
 	
-	public var weight(default, null) : Int;
+	public var priority(default, null) : Int;
 
-	public function new(weight : Int) 
+	public function new(priority : Int) 
 	{
-		this.weight = weight;
+		this.priority = priority;
 	}
 }
