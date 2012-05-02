@@ -17,5 +17,6 @@ class TestSuite extends massive.munit.TestSuite
 		add(persil.core.TestMessengerExtension);
 		add(persil.core.TestDestroy);
 		add(persil.core.TestDynamicObject);
+		add(persil.core.TestReflectUtil);
 	}
 }
