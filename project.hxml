@@ -9,3 +9,17 @@
 -lib mcover
 --macro m.cover.MCover.coverage(['persil.core'], ['construct/src'], null)
 -D MCOVER
+
+--next
+-swf-version 9
+-swf release/test/as3_test.swf
+-main TestMain
+-lib munit
+-lib hamcrest
+-lib mcover
+-cp construct/src
+-cp construct/src_test
+-cp ../Persil-Reflect/construct/src
+-cp ../Persil-Util/construct/src
+--macro m.cover.MCover.coverage(['persil.core'], ['construct/src'], null)
+-D MCOVER

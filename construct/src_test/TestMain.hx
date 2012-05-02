@@ -1,5 +1,7 @@
+#if js
 import js.Lib;
 import js.Dom;
+#end
 
 import massive.munit.client.PrintClient;
 import massive.munit.client.RichPrintClient;
@@ -32,6 +34,10 @@ class TestMain
 
 	function completionHandler(successful:Bool):Void
 	{
-		js.Lib.eval("testResult(" + successful + ");");
+		#if flash
+            flash.external.ExternalInterface.call("testResult", successful);
+        #elseif js
+			js.Lib.eval("testResult(" + successful + ");");
+		#end
 	}
 }
