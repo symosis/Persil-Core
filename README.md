@@ -6,6 +6,7 @@ These library was inspired by the original [Spicefactory Parsley](http://www.spi
 **Tested targets**
 
 * JS
+* ActionScript 3.0
 
 **Dependencies**
 
