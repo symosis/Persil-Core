@@ -10,14 +10,26 @@ class ReflectUtil
 	public static function callMethodWithMetadata(object : Dynamic, type : Class<Dynamic>, metadataClass : Class<Metadata>, args : Array<Dynamic>) : Dynamic
 	{
 		var metadata : Metadata = cast Type.createInstance(metadataClass, []);
-		var metadatas = Meta.getFields(type);
+		var allMetadatas = new Array<Dynamic<Dynamic<Array<Dynamic>>>>();
 
-		for(fieldName in Reflect.fields(metadatas))
+		var subClassType : Class<Dynamic> = type;
+
+		while(subClassType != null)
 		{
-			var meta = Reflect.field(metadatas, fieldName);
-			if (Reflect.hasField(meta, metadata.identifier))
+			allMetadatas.push(Meta.getFields(subClassType));
+			subClassType = Type.getSuperClass(subClassType);
+		}
+
+		for(metadatas in allMetadatas)
+		{
+			for(fieldName in Reflect.fields(metadatas))
 			{
-				return Reflect.callMethod(object, Reflect.field(object, fieldName), []);
+				var meta = Reflect.field(metadatas, fieldName);
+
+				if (Reflect.hasField(meta, metadata.identifier))
+				{
+					return Reflect.callMethod(object, Reflect.field(object, fieldName), []);
+				}
 			}
 		}
 		

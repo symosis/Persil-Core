@@ -31,7 +31,6 @@ class TestReflectUtil
 	}
 
 	@Test
-	@Ignore
 	function completeWasCalledInBaseClass()
 	{
 		var context = ContextBuilder.newBuilder().addConfig(TestConfigWithA).build();
