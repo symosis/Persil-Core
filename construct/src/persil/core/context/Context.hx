@@ -10,6 +10,7 @@ interface Context
 {
 	var objects : Array<ContextObject>;
 	var config : ContextConfig;
+	var parentContext : Context;
 	
 	function addObject(name : String, classInfo : ClassInfo, object : Dynamic) : ContextObject;
 

@@ -14,6 +14,7 @@ class DefaultContext implements Context
 {
 	public var objects : Array<ContextObject>;
 	public var config : ContextConfig;
+	public var parentContext : Context;
 	
 	public function new()
 	{
@@ -44,6 +45,7 @@ class DefaultContext implements Context
 			if (contextObject.name == name)
 				return contextObject.object;
 		}
+
 		return null;
 	}
 

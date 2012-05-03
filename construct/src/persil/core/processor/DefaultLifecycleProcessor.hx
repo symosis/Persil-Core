@@ -52,7 +52,8 @@ class DefaultLifecycleProcessor implements LifecycleProcessor
 				}
 				else
 				{
-					var objects = context.getDynamicObjectsByType(property.clazz);
+					var objects = fetchAllObjects(property.clazz);
+
 					if (objects.length == 0)
 					{
 						Log.warn("Found [Inject] at object " + Type.getClassName(contextObject.type)+ "#" + property.name + " but could not find object to inject.");
@@ -104,5 +105,23 @@ class DefaultLifecycleProcessor implements LifecycleProcessor
 
 			contextObject.lifecyclePhase = LifecyclePhase.POST_COMPLETE;
 		}
+	}
+
+	function fetchAllObjects(clazz : Class<Dynamic>) : List<ContextObject>
+	{
+		var currentContext : Context = context;
+		var objects = new List<ContextObject>();
+		
+		while(currentContext != null)
+		{
+			var dynamicObjects = currentContext.getDynamicObjectsByType(clazz);
+			
+			for (dynamicObject in dynamicObjects) 
+				objects.add(dynamicObject);	
+			
+			currentContext = currentContext.parentContext;
+		}
+
+		return objects;
 	}
 }

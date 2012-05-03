@@ -27,6 +27,13 @@ class ContextBuilder
 		return new ContextBuilder();
 	}
 
+	public function parentContext(parent : Context) : ContextBuilder
+	{
+		context.parentContext = parent;
+
+		return this;
+	}
+
 	public function addExtension(extension : Extension) : ContextBuilder
 	{
 		context.config.extensions.push(extension);

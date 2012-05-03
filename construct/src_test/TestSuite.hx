@@ -18,5 +18,6 @@ class TestSuite extends massive.munit.TestSuite
 		add(persil.core.TestDestroy);
 		add(persil.core.TestDynamicObject);
 		add(persil.core.TestReflectUtil);
+		add(persil.core.TestParentContext);
 	}
 }
